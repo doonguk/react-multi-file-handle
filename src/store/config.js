@@ -1,8 +1,15 @@
+import { createStore, combineReducers, compose, applyMiddleware} from "redux"
 import *as modules from './modules'
-import { createStore, combineReducers} from "redux"
 
-const reducers = combineReducers({ ...modules})
+const reducers = combineReducers({...modules})
+const middlewares = []
 
-const config = createStore(reducers)
+//Redux Devtools
+const isDev = process.env.NODE_ENV === 'development'
+const devtools = isDev && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+const composeEnhancers = devtools || compose
 
-export default config
+//preloadedState is for SSR
+const configure = () => createStore(reducers, composeEnhancers(applyMiddleware(...middlewares)))
+
+export default configure
