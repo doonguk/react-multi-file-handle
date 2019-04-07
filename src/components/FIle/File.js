@@ -1,17 +1,23 @@
 import React from 'react'
-import './File.css'
+import Preview from "../Preview"
 
 
-const File = ({imagePreview, onImageChange}) => {
+const File = ({imagePreview, onImageChange, onDelete}) => {
   const loadPreviewImage = (urls) => {
-    if(urls === []){
+    if(urls.length<1){
       return ( <div> Image is not Selected </div>)
     }
     else{
-      return urls.map( url => {
-        const { previewUrl , id } = url
-        console.log(url)
-        return <img key={id} src={previewUrl} alt="preview" />
+      return urls.map( (url, index ) => {
+        const { previewUrl } = url
+        return (
+              <Preview
+                       key={index}
+                       id={index}
+                       url={previewUrl}
+                       onDelete={onDelete}
+              />
+            )
       })
     }
   }

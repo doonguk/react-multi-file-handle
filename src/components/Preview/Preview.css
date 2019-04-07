@@ -1,0 +1,25 @@
+.img-box{
+    display : inline-block;
+    position : relative;
+}
+.img-box img{
+    width : 200px;
+    height : 200px;
+    display : inline-block;
+    border : 1px solid red;
+}
+.img-box + .img-box {
+    margin-left : 2rem;
+}
+
+.img-box .close-btn{
+    position : absolute;
+    font-size : 35px;
+    color : #555555;
+    top : 0;
+    left : 170px;
+    cursor : pointer;
+}
+.close-btn:hover{
+    color : gray;
+}

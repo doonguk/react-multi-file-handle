@@ -12,7 +12,6 @@ class FileContainer extends Component{
     const files = e.target.files
     const fileArr = Array.prototype.slice.call(files)
     const { FileActions : {setPreview} } = this.props
-    let index = 0
     fileArr.forEach( (file, loopIndex ) => {
       if(!file.type.match("image.*")){
         alert('이미지 형식만 가능')
@@ -20,22 +19,26 @@ class FileContainer extends Component{
       }
       const reader = new FileReader()
       reader.onload = () => {
-        previewUrl.push({id : index, previewUrl : reader.result})
+        previewUrl.push({ previewUrl : reader.result})
         if(loopIndex === (fileArr.length - 1)) {
           setPreview({inputName : e.target.name, fileList : previewUrl})
         }
-        index++
       }
       reader.readAsDataURL(file)
     })
   }
+  handleDelete = (id) => {
+    const { FileActions : {deletePreview}} = this.props
+    deletePreview({inputName : 'myInput', id})
+  }
   render(){
-    const { handleImageChange } = this
+    const { handleImageChange, handleDelete } = this
     const { myInput } = this.props
     return(
         <File
             imagePreview={myInput}
             onImageChange={handleImageChange}
+            onDelete={handleDelete}
         />
     )
   }

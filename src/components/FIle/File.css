@@ -1,9 +1,0 @@
-.preview img{
-  width : 200px;
-  height : 200px;
-  display : inline-block;
-  border : 1px solid red;
-}
-img + img {
-  margin-left : 2rem;
-}
